@@ -1,0 +1,169 @@
+/* Add Event Section */
+.add-event-section {
+    padding: 2rem;
+    background: #1a1f25;
+    min-height: 100vh;
+}
+
+/* Event Form */
+.event-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #242a33;
+    border-radius: 12px;
+    border: 2px solid #00f2fe;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.1);
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Labels */
+.event-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #00f2fe;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+}
+
+/* Inputs */
+.event-form input,
+.event-form textarea,
+.event-form select {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(16, 20, 24, 0.8);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    border-radius: 6px;
+    color: #e4e4e4;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.event-form input:focus,
+.event-form textarea:focus,
+.event-form select:focus {
+    outline: none;
+    border-color: #00f2fe;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+.event-form input::placeholder,
+.event-form textarea::placeholder {
+    color: rgba(228, 228, 228, 0.5);
+}
+
+/* Select Styling */
+.event-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f2fe' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+/* Preview Section */
+.form-preview {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 242, 254, 0.2);
+}
+
+.form-preview h3 {
+    color: #00f2fe;
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    background: #00f2fe;
+    border: none;
+    border-radius: 6px;
+    color: #1a1f25;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    background: #33f5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+}
+
+/* Error States */
+.event-form input:invalid,
+.event-form textarea:invalid,
+.event-form select:invalid {
+    border-color: #ff4757;
+}
+
+.error-message {
+    color: #ff4757;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* Success Message */
+.success-message {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    background: #2ed573;
+    color: white;
+    border-radius: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .add-event-section {
+        padding: 1rem;
+    }
+
+    .event-form {
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-preview {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+} 

@@ -56,40 +56,58 @@ async function initializeDatabase() {
         // Insert sample events
         const sampleEvents = [
             {
-                title: 'INPT Annual Hackathon 2024',
-                description: 'Join the brightest minds for 48 hours of coding, creativity, and collaboration. Compete, network, and innovate with fellow students and industry experts.',
-                date: '2024-04-20',
+                title: 'Mobile App Development Challenge',
+                description: 'Two day mobile app development competition. Create innovative solutions for real-world problems. Flutter and React Native workshops included.',
+                date: '2024-05-20',
                 time: '09:00',
-                location: 'Main Campus, Building A',
-                image_url: 'hackathon.jpg',
-                category: 'Technology'
+                location: 'INPT Innovation Space',
+                image_url: 'mobile-dev.jpg',
+                category: 'Hackathon'
             },
             {
-                title: 'Game Development Workshop',
-                description: 'Learn to create your own video games using Unity engine. Perfect for beginners!',
-                date: '2024-03-15',
+                title: 'Cybersecurity Summit 2024',
+                description: 'Learn about the latest trends in cybersecurity, ethical hacking, and network security. Features guest speakers from leading security firms and hands-on penetration testing workshops.',
+                date: '2024-05-10',
+                time: '10:00',
+                location: 'INPT Conference Center',
+                image_url: 'cybersecurity.jpg',
+                category: 'Conference'
+            },
+            {
+                title: 'DevOps & Agile Practices Seminar',
+                description: 'Learn modern DevOps tools and agile methodologies. Featuring workshops on Docker, Kubernetes, and CI/CD pipelines.',
+                date: '2024-04-28',
+                time: '10:00',
+                location: 'INPT Room 105',
+                image_url: 'devops.jpg',
+                category: 'Seminar'
+            },
+            {
+                title: 'Web3 & Blockchain Workshop',
+                description: 'Deep dive into blockchain technology, smart contracts, and decentralized applications. Hands-on experience with Ethereum and Solidity.',
+                date: '2024-06-15',
                 time: '14:00',
-                location: 'Computer Lab 2',
-                image_url: 'game.jpg',
+                location: 'INPT Digital Lab',
+                image_url: 'blockchain.jpg',
                 category: 'Workshop'
             },
             {
-                title: 'AI Research Symposium',
-                description: 'Join leading researchers in artificial intelligence for a day of presentations and discussions.',
-                date: '2024-05-10',
-                time: '10:00',
-                location: 'Conference Hall',
-                image_url: 'workshop.jpg',
-                category: 'Academic'
+                title: 'AI & Machine Learning Bootcamp',
+                description: 'Intensive three-day bootcamp covering deep learning, computer vision, and natural language processing. Build real AI projects with PyTorch and TensorFlow.',
+                date: '2024-07-01',
+                time: '09:00',
+                location: 'INPT AI Center',
+                image_url: 'ai-ml.jpg',
+                category: 'Bootcamp'
             },
             {
-                title: 'Board Games Tournament',
-                description: 'Compete in various board games including Chess, Go, and modern strategy games.',
-                date: '2024-03-30',
-                time: '16:00',
-                location: 'Student Center',
-                image_url: 'games.jpg',
-                category: 'Social'
+                title: 'Cloud Computing Conference',
+                description: 'Explore cloud architecture, serverless computing, and microservices. AWS, Azure, and GCP certification preparation workshops included.',
+                date: '2024-06-05',
+                time: '10:00',
+                location: 'INPT Auditorium',
+                image_url: 'cloud.jpg',
+                category: 'Conference'
             }
         ];
 

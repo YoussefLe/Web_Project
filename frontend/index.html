@@ -6,9 +6,9 @@
   <meta name="description" content="Campus Events Hub - Stay updated with workshops, games, hackathons and more at INPT." />
   <title>Campus Events Hub</title>
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-  </style>
+  <link rel="stylesheet" href="events-section.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body data-theme="dark">
   <header>
@@ -17,6 +17,10 @@
       <div class="nav-links">
         <a href="/" class="active">Events</a>
         <a href="/my-participations.html">My Participations</a>
+        <a href="/add-event.html" class="add-event-btn">
+          <i class='bx bx-plus-circle'></i>
+          Add Event
+        </a>
       </div>
       <div class="nav-right">
         <a href="login.html" id="loginLink">Login</a>
@@ -39,11 +43,53 @@
       </article>
     </section>
 
-    <section>
-      <h2>Events</h2>
-      <div id="events-list" aria-label="List of events">
+    <section class="events-section">
+      <div class="section-header">
+        <h2 class="section-title">INPT Tech Events</h2>
+        <a href="/add-event.html" class="add-event-button">
+          <i class='bx bx-plus-circle'></i>
+          Create New Event
+        </a>
+      </div>
+      
+      <div class="events-filters">
+        <h3 class="filters-title">Filter by Category</h3>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-category="all">All Events</button>
+          <button class="filter-btn" data-category="hackathon">Hackathon</button>
+          <button class="filter-btn" data-category="conference">Conference</button>
+          <button class="filter-btn" data-category="seminar">Seminar</button>
+          <button class="filter-btn" data-category="workshop">Workshop</button>
+          <button class="filter-btn" data-category="bootcamp">Bootcamp</button>
+        </div>
+      </div>
+
+      <div class="events-grid">
         <!-- Events will be loaded dynamically -->
-        <p class="loading">Loading events...</p>
+        <template id="event-template">
+          <article class="event-card">
+            <span class="event-category"></span>
+            <div class="event-content">
+              <h3 class="event-title"></h3>
+              <p class="event-description"></p>
+              <div class="event-details">
+                <div class="event-detail">
+                  <i class='bx bx-calendar'></i>
+                  <span class="event-date"></span>
+                </div>
+                <div class="event-detail">
+                  <i class='bx bx-time'></i>
+                  <span class="event-time"></span>
+                </div>
+                <div class="event-detail">
+                  <i class='bx bx-map'></i>
+                  <span class="event-location"></span>
+                </div>
+              </div>
+              <button class="participate-btn">Participate Now</button>
+            </div>
+          </article>
+        </template>
       </div>
     </section>
   </main>

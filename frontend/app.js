@@ -9,6 +9,46 @@ function checkAuth() {
     return true;
 }
 
+// Initialize filter buttons
+function initializeFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Get selected category
+            const selectedCategory = button.dataset.category.toLowerCase();
+            
+            // Filter events
+            filterEvents(selectedCategory);
+        });
+    });
+}
+
+// Filter events by category
+function filterEvents(category) {
+    const eventCards = document.querySelectorAll('.event-card');
+    
+    eventCards.forEach(card => {
+        const cardCategory = card.querySelector('.event-category').textContent.toLowerCase();
+        
+        if (category === 'all' || cardCategory === category) {
+            card.classList.remove('hidden');
+            // Add animation
+            card.style.animation = 'none';
+            card.offsetHeight; // Trigger reflow
+            card.style.animation = null;
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+}
+
 async function loadEvents() {
     if (!checkAuth()) return;
 
@@ -26,8 +66,9 @@ async function loadEvents() {
         const events = await res.json();
         console.log('Events fetched:', events);
 
-        const container = document.getElementById('events-list');
-        container.innerHTML = ''; // Clear before adding
+        const container = document.querySelector('.events-grid');
+        const template = document.getElementById('event-template');
+        container.innerHTML = ''; // Clear existing content
 
         if (!events || !events.length) {
             container.innerHTML = '<p class="no-events">No events available at the moment.</p>';
@@ -36,30 +77,55 @@ async function loadEvents() {
         }
 
         events.forEach(event => {
-            const article = document.createElement('article');
-            article.setAttribute('tabindex', '0');
-            article.innerHTML = `
-                <img src="assets/${event.image_url || 'default.jpg'}" 
-                     alt="${event.title} image" 
-                     loading="lazy"
-                     onerror="this.src='assets/workshop.jpg'" />
-                <div class="event-details">
-                    <h3>${event.title}</h3>
-                    <p>${event.description}</p>
-                    <p><strong>${event.date}</strong> at <strong>${event.time}</strong></p>
-                    <p><strong>Location:</strong> ${event.location}</p>
-                    <button class="participate-btn" onclick="showParticipationForm(${event.id})">
-                        Participate
-                    </button>
-                </div>
-            `;
-            container.appendChild(article);
+            const clone = template.content.cloneNode(true);
+            
+            // Set category with appropriate styling
+            const categorySpan = clone.querySelector('.event-category');
+            categorySpan.textContent = event.category;
+            categorySpan.classList.add(`category-${event.category.toLowerCase()}`);
+            
+            // Set event details
+            clone.querySelector('.event-title').textContent = event.title;
+            clone.querySelector('.event-description').textContent = event.description;
+            
+            // Format date
+            const eventDate = new Date(event.date);
+            const formattedDate = eventDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            clone.querySelector('.event-date').textContent = formattedDate;
+            
+            // Format time
+            const [hours, minutes] = event.time.split(':');
+            const timeDate = new Date();
+            timeDate.setHours(hours, minutes);
+            const formattedTime = timeDate.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            clone.querySelector('.event-time').textContent = formattedTime;
+            
+            // Set location
+            clone.querySelector('.event-location').textContent = event.location;
+            
+            // Add participation handler
+            const participateBtn = clone.querySelector('.participate-btn');
+            participateBtn.onclick = () => showParticipationForm(event.id);
+            
+            container.appendChild(clone);
         });
+
+        // Initialize filters after loading events
+        initializeFilters();
 
         console.log('Events rendered successfully.');
     } catch (err) {
         console.error('Error loading events:', err);
-        const container = document.getElementById('events-list');
+        const container = document.querySelector('.events-grid');
         container.innerHTML = '<p class="error">Unable to load events. Please try again later.</p>';
     }
 }

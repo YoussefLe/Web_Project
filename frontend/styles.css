@@ -101,21 +101,32 @@ nav {
 
 .nav-links {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .nav-links a {
-    color: var(--text-color);
+    color: #e4e4e4;
     text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    transition: color 0.3s ease;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+    color: #00f2fe;
+}
+
 .nav-links a.active {
-    background-color: var(--primary-color);
-    color: white;
+    color: #00f2fe;
+    background: rgba(0, 242, 254, 0.1);
+}
+
+/* Add Event Button in Nav */
+.nav-links .add-event-btn {
+    margin-left: 1rem;
+    font-weight: 500;
 }
 
 .nav-right a {
