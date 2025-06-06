@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Campus Events Hub - Stay updated with workshops, games, hackathons and more at INPT." />
+  <title>Campus Events Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <div class="logo" tabindex="0">Campus Events Hub</div>
+    <nav>
+      <div class="nav-links">
+        <a href="/" class="active">Events</a>
+        <a href="/my-participations.html">My Participations</a>
+      </div>
+      <div class="nav-right">
+        <a href="login.html" id="loginLink">Login</a>
+        <a href="register.html" id="registerLink">Register</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Highlighted Event</h2>
+      <article id="highlighted-event" tabindex="0" aria-label="Highlighted Hackathon event">
+        <img src="assets/hackathon.jpg" alt="Hackathon event image" loading="lazy" />
+        <div class="details">
+          <h3>INPT Annual Hackathon 2024</h3>
+          <p>Join the brightest minds for 48 hours of coding, creativity, and collaboration. Compete, network, and innovate with fellow students and industry experts.</p>
+          <div class="date">April 20-22, 2024</div>
+          <button class="participate-btn" onclick="showParticipationForm(1)">Participate Now</button>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Events</h2>
+      <div id="events-list" aria-label="List of events">
+        <!-- Events will be loaded dynamically -->
+        <p class="loading">Loading events...</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

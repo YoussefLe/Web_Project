@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Participations - Campus Events Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    </style>
+</head>
+<body data-theme="dark">
+    <header>
+        <div class="logo" tabindex="0">Campus Events Hub</div>
+        <nav>
+            <div class="nav-links">
+                <a href="/">Events</a>
+                <a href="/my-participations.html" class="active">My Participations</a>
+            </div>
+            <div class="nav-right">
+                <a href="login.html" id="loginLink">Login</a>
+                <a href="register.html" id="registerLink">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>My Event Participations</h2>
+            <div id="participations-list" aria-label="List of my event participations">
+                <p class="loading">Loading participations...</p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { isAuthenticated, addAuthHeader, logout, getApiUrl } from './auth-utils.js';
+
+        // Check authentication
+        if (!isAuthenticated()) {
+            window.location.href = '/login.html';
+        }
+
+        // Add logout button
+        function addLogoutButton() {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                const logoutBtn = document.createElement('button');
+                logoutBtn.textContent = 'Logout';
+                logoutBtn.className = 'logout-btn';
+                logoutBtn.onclick = logout;
+                nav.appendChild(logoutBtn);
+            }
+        }
+
+        // Load participations
+        async function loadParticipations() {
+            try {
+                const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).userId;
+                const apiUrl = await getApiUrl();
+                const res = await fetch(`${apiUrl}/api/events/participations/${userId}`, await addAuthHeader());
+                
+                if (res.status === 401) {
+                    logout();
+                    return;
+                }
+
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+
+                const participations = await res.json();
+                const container = document.getElementById('participations-list');
+                container.innerHTML = '';
+
+                if (!participations || !participations.length) {
+                    container.innerHTML = '<p class="no-events">You haven\'t participated in any events yet.</p>';
+                    return;
+                }
+
+                participations.forEach(participation => {
+                    const article = document.createElement('article');
+                    article.setAttribute('tabindex', '0');
+                    article.innerHTML = `
+                        <div class="participation-details">
+                            <h3>${participation.event_title}</h3>
+                            <p><strong>Team Name:</strong> ${participation.team_name}</p>
+                            <p><strong>Team Members:</strong> ${participation.team_members}</p>
+                            <p><strong>Registration Date:</strong> ${new Date(participation.created_at).toLocaleDateString()}</p>
+                            ${participation.additional_info ? `<p><strong>Additional Info:</strong> ${participation.additional_info}</p>` : ''}
+                        </div>
+                    `;
+                    container.appendChild(article);
+                });
+            } catch (err) {
+                console.error('Error loading participations:', err);
+                const container = document.getElementById('participations-list');
+                container.innerHTML = '<p class="error">Unable to load participations. Please try again later.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addLogoutButton();
+            loadParticipations();
+        });
+    </script>
+</body>
+</html> 
